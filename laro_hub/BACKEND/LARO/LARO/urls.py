@@ -22,7 +22,7 @@ from drf_yasg import openapi
 from rest_framework import permissions
 from API.template_views import (
     index_view, dashboard_view, login_view, signup_view,
-    overview_view, profile_view, notifications_view
+    overview_view, profile_view, notifications_view, lobby_view
 )
 
 # Swagger schema view (no changes needed here)
@@ -70,6 +70,8 @@ urlpatterns = [
     path('profile.html', profile_view, name='profile_html'),
     path('notifications/', notifications_view, name='notifications'),
     path('notifications.html', notifications_view, name='notifications_html'),
+    path('lobby/', lobby_view, name='lobby'),
+    path('lobby.html', lobby_view, name='lobby_html'),
     
     # Include your message app URLs
     path('', include('MSG.urls')),

@@ -154,4 +154,36 @@ document.addEventListener("DOMContentLoaded", function () {
     closeBtn?.addEventListener("click", () => {
         createGamePopup.style.display = "none";
     });
+
+    // Handle Create Game submit -> go to lobby
+    const submitBtn = document.getElementById("create-game-submit-btn");
+    submitBtn?.addEventListener("click", () => {
+        const dateEl = document.getElementById("invitation-date");
+        const timeEl = document.getElementById("invitation-time");
+        const typeEl = document.getElementById("game-type");
+        const nameEl = document.getElementById("event-name");
+
+        const date = dateEl?.value?.trim();
+        const time = timeEl?.value?.trim();
+        const gameType = typeEl?.value?.trim();
+        const eventName = nameEl?.value?.trim();
+
+        if (!selectedCourt) {
+            alert("Please select a court first.");
+            return;
+        }
+        if (!date || !time || !gameType || !eventName) {
+            alert("Please complete the form (date, time, type, and event name).");
+            return;
+        }
+
+        // Optionally persist details for the lobby page to use
+        try {
+            const payload = { selectedCourt, date, time, gameType, eventName };
+            localStorage.setItem("laro_current_game", JSON.stringify(payload));
+        } catch (_) {}
+
+        // Navigate to lobby UI served by Django
+        window.location.href = "/lobby/";
+    });
 });

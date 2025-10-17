@@ -975,11 +975,16 @@ document.addEventListener("DOMContentLoaded", () => {
             // Store game data (in a real app, this would be sent to a server)
             console.log('Game created:', game);
 
+            // Persist to localStorage for lobby usage
+            try {
+                localStorage.setItem('laro_current_game', JSON.stringify(game));
+            } catch (e) {}
+
             // Show success message
             alert('Game created successfully!');
 
-            // Close the popup
-            closePopup(createGamePopup);
+            // Redirect to lobby UI (served by Django)
+            window.location.href = '/lobby/';
         });
     }
 
