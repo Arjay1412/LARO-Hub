@@ -41,3 +41,9 @@ def notifications_view(request):
     View function for the notifications page.
     """
     return render(request, 'notifications.html')
+
+def lobby_view(request):
+    """
+    View function for the game lobby page.
+    """
+    return render(request, 'lobby.html')
